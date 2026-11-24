@@ -1,0 +1,43 @@
+Calculadora RCV
+Copyright (c) 2026 Aleix Serralonga Fustier. Tots els drets reservats.
+All rights reserved.
+
+1. ÚS PERMÈS
+   Es permet utilitzar aquesta eina, tal com es publica, per a ús personal i professional no
+   comercial (assistencial, docent o de recerca sense afany de lucre), sense necessitat
+   d'autorització. Es pot obrir des de l'enllaç publicat o desar-ne una còpia d'ús propi.
+
+2. ÚS NO PERMÈS SENSE AUTORITZACIÓ ESCRITA DE L'AUTOR
+   Queda prohibit, sense autorització escrita prèvia de l'autor:
+   a) copiar, publicar o redistribuir l'eina, el seu codi o les seves dades a tercers
+      (inclosos altres repositoris, webs, aplicacions o intranets);
+   b) modificar, traduir, adaptar o crear-ne obres derivades;
+   c) extreure'n i reutilitzar codi, taules o textos en un altre programari;
+   d) vendre-la, llicenciar-la, cedir-la, oferir-la com a servei o integrar-la en un producte;
+   e) qualsevol ús comercial o amb afany de lucre.
+
+3. RESERVA DE DRETS
+   L'autor es reserva tots els drets no concedits expressament en aquest document, inclosa
+   l'explotació comercial present i futura. Aquest document no transfereix cap dret de
+   propietat intel·lectual.
+
+4. MATERIAL DE TERCERS
+   Les guies clíniques, taules, fórmules, coeficients i dades publicades per tercers que
+   l'eina recull (p. ex. SCORE2, ESC/EAS, XULA, SEA, MESA) pertanyen als seus titulars i no
+   estan cobertes per aquesta llicència.
+
+5. EXCLUSIÓ DE GARANTIA I RESPONSABILITAT
+   L'eina és un suport a la decisió clínica i no substitueix el criteri facultatiu. No és un
+   producte sanitari certificat. S'ofereix «tal com és», sense garantia de cap mena, ni
+   explícita ni implícita, d'exactitud, actualitat o adequació a un ús concret. El facultatiu
+   és l'únic responsable de les decisions clíniques. L'autor no és responsable de cap dany
+   derivat de l'ús de l'eina, en la mesura que ho permeti la llei.
+
+6. CONTACTE
+   Per demanar autorització per a un ús no previst aquí, obre una issue en aquest repositori.
+
+---
+English summary: Copyright (c) 2026 Aleix Serralonga Fustier. All rights reserved. Free to use as
+published for personal and professional non-commercial purposes. Copying, redistribution,
+modification, derivative works, sale and any commercial use require prior written permission.
+Provided "as is", without warranty; clinical decision support only, not a certified medical device.

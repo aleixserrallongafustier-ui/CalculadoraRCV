@@ -51,6 +51,7 @@ L'eina combina i mostra per separat el que diuen diverses guies; quan es contrad
 ## Estat i llicència
 
 - Versió publicada: 24/11/2026.
-- **Tots els drets reservats.** El codi es pot consultar en aquest repositori, però no es permet copiar-lo, modificar-lo, redistribuir-lo ni fer-ne un ús comercial sense autorització expressa de l'autor.
+- **© 2026 Aleix Serralonga Fustier. Tots els drets reservats** (vegeu el fitxer [LICENSE](LICENSE)). Es pot utilitzar l'eina per a ús personal i professional no comercial. Copiar-la, modificar-la, redistribuir-la, vendre-la o fer-ne qualsevol ús comercial requereix autorització escrita de l'autor.
+- Les guies i taules de tercers que l'eina recull pertanyen als seus titulars.
 - Aquest repositori conté només la versió compilada (`index.html`); el codi font es manté en privat.
 - Per a errors o suggeriments, obre una *issue* en aquest repositori.

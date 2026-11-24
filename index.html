@@ -1,4 +1,12 @@
 <!doctype html>
+<!--
+  Calculadora RCV
+  © 2026 Aleix Serralonga Fustier. Tots els drets reservats.
+  Es permet l'ús personal i professional no comercial. Queda prohibit copiar, modificar, redistribuir
+  o vendre aquest programari, o usar-lo amb finalitat comercial, sense autorització escrita de l'autor.
+  Eina de suport a la decisió clínica; no substitueix el criteri facultatiu. Sense garantia de cap mena.
+  Veure el fitxer LICENSE del repositori.
+-->
 <html lang="ca">
 <head>
 <meta charset="utf-8">
@@ -6,6 +14,8 @@
 <meta name="theme-color" content="#115E73">
 <meta name="color-scheme" content="light">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="author" content="Aleix Serralonga Fustier">
+<meta name="copyright" content="© 2026 Aleix Serralonga Fustier. Tots els drets reservats.">
 <title>Calculadora RCV</title>
 <style>
 :root {
@@ -2013,7 +2023,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
   }
 
   /* ---------- Exclusions → categoria a priori (XULA §1.1, §1.5, Taula 3; ESC/EAS 2025 Taula 3) ---------- */
-  var CKD_A3_NOTE = 'MRC amb albuminúria A3 (ACR >300 mg/g) i FG ≥45: la XULA (Taula 3) dona «alt»; aquí s\'aplica «molt alt» segons l\'ESC 2026 (Taula 7, p. 22, classe I B). Decisió d\'Aleix, 04/11/2026 (Seguiment, punt 55).';
+  var CKD_A3_NOTE = 'MRC amb albuminúria A3 (ACR >300 mg/g) i FG ≥45: la XULA (Taula 3) dona «alt»; aquí s\'aplica «molt alt» segons l\'ESC 2026 (Taula 7, p. 22, classe I B). Criteri adoptat a l\'app.';
   // Límits d'albuminúria (mg/g): A2 comença a 30 (inclòs); A3 és estrictament >300 (SEA 2026 Tabla 5; ESC 2026 Taula 7; punt 69).
   var ACR_A2_FROM = 30, ACR_A3_ABOVE = 300;
   /* ---------- DM1: XULA §5.3.2 (p. 32) — punt 120 ----------
@@ -2087,8 +2097,8 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
       }
       else hit(0, 'Diabetis <10 anys, sense LOD ni altres FRCV → risc moderat (LDL <100; XULA Taula 3, p. 14)');
       if (dm.type !== 1 && lod && !p.ascvd && nMaj < 3 && dur <= 10)
-        notes.push('Discrepància entre guies: ESC/EAS 2019 (Taula 4) i 2025 (Taula 3) classifiquen la diabetis amb lesió d\'òrgan diana com a molt alt risc; la XULA (Taula 3, p. 14) només hi arriba amb >10 anys d\'evolució i LOD. S\'aplica la XULA (decisió d\'Aleix, 11/11/2026).');
-      if (dm.type !== 1) notes.push('ESC 2023 usa SCORE2-Diabetes per a DM2 sense MCVA (Fase 5); XULA/ESC 2019 segueixen l\'esquema per categories (decisió 14/16).');
+        notes.push('Discrepància entre guies: ESC/EAS 2019 (Taula 4) i 2025 (Taula 3) classifiquen la diabetis amb lesió d\'òrgan diana com a molt alt risc; la XULA (Taula 3, p. 14) només hi arriba amb >10 anys d\'evolució i LOD. S\'aplica la XULA (criteri adoptat a l\'app).');
+      if (dm.type !== 1) notes.push('ESC 2023 usa SCORE2-Diabetes per a DM2 sense MCVA (Fase 5); XULA/ESC 2019 segueixen l\'esquema per categories (criteri adoptat a l\'app).');
     }
     // MRC
     var k = p.ckd, ckdA3Raised = false;
@@ -2118,7 +2128,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
       if (p.ascvd || (dm && dm.present) || n >= 4) hit(2, 'HF amb MCVA, diabetis o ≥4 factors addicionals → molt alt risc (XULA Taula 3)');
       else if (n >= 1 || !young) hit(1, 'HF amb ' + (n >= 1 ? '1–3 factors addicionals' : 'sense factors addicionals (no jove)') + ' → alt risc');
       else hit(0, 'HF jove sense factors addicionals i en tractament → risc moderat (LDL <100)');
-      notes.push('ESC/EAS 2019: HF sense altres factors majors = alt risc per defecte; la XULA afegeix el moderat per a joves (decisió 16: seguim la XULA).');
+      notes.push('ESC/EAS 2019: HF sense altres factors majors = alt risc per defecte; la XULA afegeix el moderat per a joves (s\'aplica la XULA).');
     }
     // Un sol factor extremadament elevat → ALT
     var ex = [];
@@ -2130,7 +2140,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
     if (p.nonHdl != null && p.nonHdl >= 220) ex.push('C-no-HDL ≥220 mg/dL (criteri XULA; no definit per l\'ESC)');
     var nhd = (p.nonHdl != null) ? p.nonHdl : ((p.tc != null && p.hdl != null) ? p.tc - p.hdl : null);
     if (nhd != null && nhd > 210 && nhd < 220)
-      notes.push('C-no-HDL ' + Math.round(nhd) + ' mg/dL: la XULA es contradiu (p. 13 §1.5: ≥220; Taula 3, p. 14, i p. 54: >210). S\'aplica ≥220, coherent amb la regla C-LDL + 30 (p. 38) (decisió d\'Aleix, 11/11/2026).');
+      notes.push('C-no-HDL ' + Math.round(nhd) + ' mg/dL: la XULA es contradiu (p. 13 §1.5: ≥220; Taula 3, p. 14, i p. 54: >210). S\'aplica ≥220, coherent amb la regla C-LDL + 30 (p. 38) (criteri adoptat a l\'app).');
     if (ex.length) hit(1, 'Factor de risc extremadament elevat: ' + ex.filter(function (x, i, a) { return a.indexOf(x) === i; }).join('; ') + ' → alt risc');
     return {
       excluded: level >= 0, outOfRange: outOfRange,
@@ -2320,14 +2330,14 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
     out.adjusted = Object.assign({ riskPct: mod.adjustedPct }, goalFor(lvAdj, q.ldl, gopt), { modifiers: mod });
     out.final = out.adjusted;
     if (dmOver70) {
-      out.flags.push('NOTA (confirmat per Aleix, sessió 3): ≥70 anys amb diabetis → SCORE2-OP amb la diabetis com a predictor, més la categoria a priori de la XULA; la categoria final és la més alta de les dues.');
+      out.flags.push('NOTA: ≥70 anys amb diabetis → SCORE2-OP amb la diabetis com a predictor, més la categoria a priori de la XULA; la categoria final és la més alta de les dues.');
       var ap = ex.aPriori ? ex.level : -1;
       out.aPrioriDiabetes = ex.aPriori;
       if (ap > lvAdj) { out.final = Object.assign({}, ex.aPriori, { riskPct: mod.adjustedPct }); }
     }
     if (set === 'XULA_2022') {
       var alt = levelFromRisk(res.riskPct, age, 'ESC_EAS_2025');
-      if (alt !== lvl) out.flags.push('DISCREPÀNCIA ENTRE GUIES: amb els llindars plans de l\'ESC/EAS 2025 (Taula 3: <2 / 2–<10 / 10–<20 / ≥20 %) la categoria seria «' + LEVEL_LABEL[LEVELS[alt]] + '» en lloc de «' + LEVEL_LABEL[LEVELS[lvl]] + '» (XULA / ESC 2021 de prevenció, per edat). Llindars per defecte: XULA (decisió d\'Aleix).');
+      if (alt !== lvl) out.flags.push('DISCREPÀNCIA ENTRE GUIES: amb els llindars plans de l\'ESC/EAS 2025 (Taula 3: <2 / 2–<10 / 10–<20 / ≥20 %) la categoria seria «' + LEVEL_LABEL[LEVELS[alt]] + '» en lloc de «' + LEVEL_LABEL[LEVELS[lvl]] + '» (XULA / ESC 2021 de prevenció, per edat). Llindars per defecte: XULA (criteri adoptat a l\'app).');
     }
     return out;
   }
@@ -3641,7 +3651,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
   };
   /* Reserves que sempre acompanyen la vista per dosi (no es resolen en silenci). */
   var DOSE_RESERVES = [
-    'Mitjana poblacional de metaanàlisi, no la resposta individual: a VOYAGER (Karlson 2016, PMID 27533947) la desviació estàndard individual és de 12,8–17,9 punts i entre el 5,3 i el 53,3 % dels pacients no arriben al 30 % de reducció segons la dosi (xifres de la sessió 14, no tornades a llegir).',
+    'Mitjana poblacional de metaanàlisi, no la resposta individual: a VOYAGER (Karlson 2016, PMID 27533947) la desviació estàndard individual és de 12,8–17,9 punts i entre el 5,3 i el 53,3 % dels pacients no arriben al 30 % de reducció segons la dosi (xifres pendents de recontrastar amb el text original).',
     'A dosis altes d\'atorvastatina i rosuvastatina l\'efecte pot ser menor que a Law 2003 (Naci 2013, Eur J Prev Cardiol 20:658–670; valor no extret).',
     'STELLAR (Jones 2003, PMID 12860216, resum): rosuvastatina 10–80 mg redueix l\'LDL de mitjana 8,2 punts més que atorvastatina 10–80, 26 més que pravastatina 10–40 i 12–18 més que simvastatina 10–80; les xifres per dosi no s\'han extret.'
   ];
@@ -3914,7 +3924,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
     var alt = planOnScale(p, other);
     main.version = VERSION;
     main.goalUnverified = !!p.goal.unverified;
-    if (main.goalUnverified) main.flags.unshift('L\'objectiu de LDL d\'aquesta categoria (risc extrem, <40 mg/dL) no està verificat a la figura de l\'ESC/EAS 2025 (Seguiment §5, punt 22).');
+    if (main.goalUnverified) main.flags.unshift('L\'objectiu de LDL d\'aquesta categoria (risc extrem, <40 mg/dL) no està verificat a la figura de l\'ESC/EAS 2025.');
 
     // D1: avís quan l'altra escala donaria un conjunt de propostes diferent (no es resol en silenci).
     main.otherScale = { scale: other, label: SOURCES[other].label, status: alt.status, nProposals: alt.proposals.length };
@@ -3988,7 +3998,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
   // Finançament: consulta del 24/10/2026 (BIFIMED, nomenclàtor d'octubre 2026; CatSalut PHF; CIMA). Cal tornar-hi abans d'usar-ho com a criteri.
   var FUNDING = {
     consulted: '2026-10-24',
-    source: 'claude/Financament_hipolipemiants_BIFIMED_CatSalut_2026-10-24.md (BIFIMED, CatSalut PHF, CIMA) i claude/Verificacio_acords_CFT_SISCAT_iPCSK9_2026-11-10.md (acords CFT-SISCAT)',
+    source: 'BIFIMED, CatSalut (PHF) i CIMA, consultats el 24/10/2026; acords CFT-SISCAT, verificats el 10/11/2026',
     needsReconsultation: true,
     items: [
       { drug: 'Evolocumab (Repatha)', status: 'Sí per a determinades indicacions (restringit)', criteria: 'Malaltia CV establerta, HFHo o HFHe no controlades (LDL >100 mg/dL amb dosi màxima tolerada d\'estatina). La intolerància/contraindicació a estatines no és una via independent: s\'aplica dins d\'aquests grups (acords CFT-SISCAT, 2019 i 2024).' },
@@ -4001,12 +4011,12 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
   // Acords CFT-SISCAT (CatSalut): evolocumab i alirocumab (v2, 22/07/2019, annex pàg. 6 de 9) i inclisiran (11/07/2024, Taula 1, pàg. 6 de 8): taula de llindars idèntica als tres; verificada el 10/11/2026 (punt 99).
   var CATSALUT_EVOLOCUMAB = {
     source: 'acord-CFT-SISCAT-evolocumab-hipercolesterolemia.pdf (v2, 22/07/2019), annex pàg. 6 de 9; la taula és idèntica a l\'acord d\'alirocumab (v2, 22/07/2019, annex pàg. 6 de 9) i a la Taula 1 de l\'acord d\'inclisiran (11/07/2024, pàg. 6 de 8)',
-    versions: 'Evolocumab i alirocumab: versió 2 del 22/07/2019. Inclisiran: 11/07/2024. Aleix no n\'ha trobat versions posteriors (10/11/2026).',
+    versions: 'Evolocumab i alirocumab: versió 2 del 22/07/2019. Inclisiran: 11/07/2024. No s\'han trobat versions posteriors (consulta del 10/11/2026).',
     notes: [
       'Cal que el cLDL superi el llindar en dues mesures consecutives amb teràpia hipolipemiant òptima (≥8 setmanes), amb adherència comprovada a l\'HC3 (retirada de la medicació el 100 % els darrers 6 mesos) i actuació intensiva sobre els factors de risc.',
       'Teràpia hipolipemiant òptima: estatina d\'alta intensitat, sola o amb ezetimiba; si hi ha intolerància (≥2 estatines no tolerades, una a la dosi més baixa) o contraindicació, la dosi màxima tolerada. És l\'únic efecte de la intolerància: no és una via d\'accés independent.',
       'Hipercolesterolèmia no familiar o dislipèmia mixta: només prevenció secundària (malaltia CV establerta); no hi ha via de prevenció primària. A l\'HFHe, el diagnòstic s\'ha de fer en unitat especialitzada i registrar-se al Registre d\'HFH del CatSalut.',
-      'HFHo: candidats els pacients amb HFHo (només evolocumab); l\'annex no fixa llindar de cLDL. Decisió d\'Aleix (10/11/2026): l\'app aplica LDL >100 mg/dL (criteri de la financiació catalana).',
+      'HFHo: candidats els pacients amb HFHo (només evolocumab); l\'annex no fixa llindar de cLDL. Criteri adoptat a l\'app: LDL >100 mg/dL (criteri de la financiació catalana).',
       'Inclisiran (2024): a més, cal haver rebut alirocumab i/o evolocumab sense resposta terapèutica òptima o amb intolerància inacceptable; indicació per comissió multidisciplinària de cada hospital (circuit SISCAT).',
       'No es considera adequat (alirocumab i evolocumab, 2019): comorbiditats que afectin l\'esperança de vida, mala adherència o incompliment reiterat, insuficiència cardíaca NYHA III–IV i insuficiència renal greu en diàlisi. L\'acord d\'inclisiran (2024) no repeteix les dues darreres exclusions.',
       'Interrupció (els tres): reducció <30 % del cLDL respecte al basal o toxicitat/intolerància inacceptable; alirocumab i evolocumab, també cLDL <20 mg/dL en dues determinacions consecutives. Prescripció en centres hospitalaris amb experiència.'
@@ -5852,7 +5862,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
     return (a ? '<li>Llindar P75 ' + (a.exact ? '' : '≈ ') + cacFmt(a.cut) + ' UA per a ' + MS.personLabel(S.sex, S.cacRace || 'white') + ' de ' + S.age + ' anys' + (a.exact ? ' (valor de l’AHA 2010)' : ', estimat entre els ' + mesaAge(a.ages[0]) + ' i els ' + mesaAge(a.ages[1]) + ' anys') + '.</li>' : '') +
       '<li>Percentil estimat (no exacte) a partir de la Taula 2 de McClelland et al., Circulation 2006;113:30–37 (PMID 16365194): percentils 25, 50, 75, 90 i 95 per sexe i grup a 49,5, 59,5, 69,5 i 79,5 anys, i el P75 exacte de l’AHA 2010 (Circulation 2010;123:e18–e209, Taula 4-1) a 45, 55, 65 i 75 anys. Entre edats i entre percentils s’interpola linealment en log(CAC+1). El percentil exacte només el dona el calculador oficial de MESA (mesa-nhlbi.org; 45–84 anys).</li>' +
       '<li>Prova interna: la interpolació de la Taula 2 reprodueix les 24 cel·les P75 de l’AHA a 55, 65 i 75 anys dins de ±max(8 UA; 12 %). Només es calcula entre els 45 i els 79 anys (no s’extrapola); abans dels 50 anys hi ha menys dades i l’estimació és menys fiable (es pot desviar en els dos sentits).</li>' +
-      '<li>Contrastat amb l’eina oficial de MESA (26 consultes manuals d’Aleix, 18/11/2026, a 45–75 anys; una descartada per incoherent): el P75 de l’app queda entre 3 UA per sota i 10 UA per sobre del de l’eina (≤12 %), i el percentil estimat coincideix dins ±4 punts a 24 de 25 casos. A 76–79 anys no s’ha contrastat: allà el P75 supera 100 UA i el percentil no decideix mai la categoria.</li>' +
+      '<li>Contrastat amb l’eina oficial de MESA (26 consultes manuals, 18/11/2026, a 45–75 anys; una descartada per incoherent): el P75 de l’app queda entre 3 UA per sota i 10 UA per sobre del de l’eina (≤12 %), i el percentil estimat coincideix dins ±4 punts a 24 de 25 casos. A 76–79 anys no s’ha contrastat: allà el P75 supera 100 UA i el percentil no decideix mai la categoria.</li>' +
       '<li>MESA són persones dels EUA de 45–84 anys sense malaltia CV clínica ni diabetis tractada, en quatre grups (blanc, negre, hispà, xinès), amb puntuació d’Agatston ajustada amb fantasma (l’Agatston sense ajustar és quasi equivalent; el volum no serveix). No està validat a Espanya ni hi ha referència per a altres orígens. Els mateixos autors consideren prematur fer servir aquests percentils per a decisions mèdiques: indiquen si una puntuació és alta respecte a persones de la mateixa edat, sexe i grup. Cal valorar-ho amb criteri clínic.</li>' +
       '<li>La SEA 2026 no diu quina referència de percentil cal fer servir.</li>';
   }
@@ -6080,7 +6090,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
     '<li>SCORE2-LAC (Eur Heart J 2026, ehag698) i SCORE2-Àsia-Pacífic (Eur Heart J 2025;46:702).</li>' +
     '<li>Categories i objectius de LDL: guia XULA 2022 (Taula 1 i Taula 3); ESC 2021 de prevenció (Figura 6); Estàndards SEA 2026 (Taula 6).</li>' +
     '<li>Llindars alternatius: ESC/EAS 2025 (Eur Heart J 2025;46:4359, Taula 3).</li>' +
-    '<li>MRC amb albuminúria A3 (ACR >300 mg/g) i FG ≥45: la XULA (Taula 3) dona «alt»; s’aplica «molt alt» segons l’ESC 2026 CVD + MRC (Eur Heart J 2026, ehag098), Taula 7 (p. 22). Decisió d’Aleix, 04/11/2026.</li>' +
+    '<li>MRC amb albuminúria A3 (ACR >300 mg/g) i FG ≥45: la XULA (Taula 3) dona «alt»; s’aplica «molt alt» segons l’ESC 2026 CVD + MRC (Eur Heart J 2026, ehag098), Taula 7 (p. 22). Criteri adoptat a l’app.</li>' +
     '<li>Albuminúria A2 = ACR 30–300 mg/g (llindar inclòs, ≥30): ESC 2026 i Estàndards SEA 2026, Tabla 5/7.</li>' +
     '<li>Ajust per modificadors: XULA §1.4 i §6 (suggeriment; l’ESC 2021 només els tracta de manera qualitativa).</li></ul></details>';
 
@@ -6243,6 +6253,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
   function footerHTML() {
     return '<div class="sec"><button type="button" class="btn ghost" data-act="copy" id="copy-btn">Copia el resum</button>' + SOURCES +
       '<p class="fine">Suport a la decisió clínica; no substitueix el criteri facultatiu. Càlcul al dispositiu, sense dades de pacient.</p>' +
+      '<p class="fine">© 2026 Aleix Serralonga Fustier. Tots els drets reservats.</p>' +
       '<button type="button" class="link" data-act="reset">Nou pacient</button></div>';
   }
 
@@ -7165,7 +7176,7 @@ html { scroll-padding-top: calc(100px + env(safe-area-inset-top)); scroll-paddin
     var c = D.pcsk9Context({ ldl: S.ldl }), t = '';
     t += note('', '<p><b>Informatiu i per separat.</b> Cap d’aquests criteris filtra les pautes de dalt.</p><p>' + esc(c.discrepancy) + '</p><p>' + esc(c.authorization) + '</p>');
     t += '<h3 class="gap-h">' + esc(c.clinical.label) + '</h3>' + t9table(c.clinical.rows);
-    t += '<p class="hint">' + esc(c.clinical.note) + (c.clinical.layoutVerified ? '' : ' Estructura de la taula pendent de verificació visual al PDF (Seguiment, punt 40).') + '</p>';
+    t += '<p class="hint">' + esc(c.clinical.note) + (c.clinical.layoutVerified ? '' : ' Estructura de la taula pendent de verificació visual al PDF.') + '</p>';
     t += '<h3 class="gap-h">' + esc(c.funding.label) + '</h3><ul class="fundl">' + c.funding.items.map(function (x) {
       return '<li><b>' + esc(x.drug) + '.</b> ' + esc(x.status) + (x.criteria && x.criteria !== '—' ? '. ' + esc(x.criteria) : '') + '</li>';
     }).join('') + '</ul><p class="hint">' + (c.funding.needsReconsultation ? 'Cal reconsultar BIFIMED i CatSalut abans de fer-ho servir com a criteri. ' : '') + 'Font: ' + esc(c.funding.source) + '.</p>';
